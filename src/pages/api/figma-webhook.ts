@@ -10,7 +10,7 @@ const WEBHOOK_SECRET = process.env.FIGMA_WEBHOOK_SECRET;
 const figmaApi = axios.create({
   baseURL: FIGMA_API_URL,
   headers: {
-    "X-Figma-Token": FIGMA_TOKEN,
+    "X-Figma-Token": FIGMA_TOKEN || "",
   },
 });
 
