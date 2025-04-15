@@ -1,3 +1,4 @@
+// @typescript-eslint/no-explicit-any
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import crypto from "crypto";
@@ -45,7 +46,7 @@ export default async function handler(
 
       // Usando Axios para buscar detalhes do arquivo atualizado
       const response = await figmaApi.get(`/files/${fileKey}`);
-      const fileData = response.data;
+      const fileData: any = response.data;
 
       console.log("Arquivo atualizado:", fileData.name);
 
@@ -68,12 +69,8 @@ export default async function handler(
     }
 
     return res.status(200).json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error processing Figma webhook:", error);
-
-    if (axios.isAxiosError(error)) {
-      console.error("Figma API error:", error.response?.data);
-    }
 
     return res.status(500).json({ error: "Internal server error" });
   }
